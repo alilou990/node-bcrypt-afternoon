@@ -5,6 +5,14 @@ const usersOnly = (req, res, next) => {
     next();
 };
 
+const adminsOnly = (req, res, next) => {
+    if(req.session.user.isAdmin){
+        return res.status(403).send('You are not an admin!')
+    }
+    next()
+}
+
 module.exports = {
-    usersOnly
+    usersOnly,
+    adminsOnly
 }
